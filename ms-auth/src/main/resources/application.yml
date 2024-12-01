@@ -1,0 +1,35 @@
+server:
+  port: 8081 # ms-auth üçün fərqli port
+
+spring:
+  application:
+    name: ms-auth # Eureka serverdə qeydiyyatdan keçən xidmətin adı
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres # Verilənlər bazası bağlantısı
+    username: postgres
+    password: Ali200aa
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update # sxem avtomatik idarə olunur (istehsal üçün uyğun dəyər)
+    open-in-view: false # Xəbərdarlığı aradan qaldırır
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect # PostgreSQL üçün doğru dialekt
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Eureka Server-in URL-i
+    fetch-registry: true  # Eureka-nın digər xidmətlərini axtar
+    register-with-eureka: true  # ms-auth xidmətini qeydiyyatdan keçir
+  instance:
+    prefer-ip-address: true # Xidmətin IP ünvanını istifadə edir
+
+jwt:
+  secret: your-secret-key # JWT üçün gizli açar
+  expiration: 3600000 # Token müddəti millisaniyə ilə (1 saat)
+
+logging:
+  level:
+    com.example.msauth: DEBUG
